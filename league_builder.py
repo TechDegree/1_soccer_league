@@ -70,7 +70,11 @@ def save_to_file(file_name, teams_dic):
 
 def main():
     PLAYER_DATA = "soccer_players.csv"
-    TEAMS_NAMES = ["Sharks", "Dragons", "Raptors"]
+    TEAMS_NAMES = {"Sharks": ["10:00 AM", "Monday, March 6", "Green Dragon Venue", "2018", "Juliana Yandar"],
+                   "Dragons": ["11:20 AM", "Thursday, March 9", "Yellow Boats United", "2018", "Alina Marakash"],
+                   "Raptors": ["09:15 AM", "Wednesday, March 2", "Orange Monsters University", "2018", "Dima Kailar"]
+    }
+
     TEAMS_DATA = "teams.txt"
     TEAMS = {}
     
