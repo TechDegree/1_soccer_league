@@ -1,4 +1,5 @@
 import csv
+import random
 
 # import CSV data and save to a dictionary
 
@@ -29,14 +30,42 @@ def csv_to_list_of_dicts(csv_file):
 
 
 # sort players into three teams
+def experiance_level_lists(players):
+    # players is a list of dictionaries
+    experienced_players = []
+    inexperienced_players = []
+    
+    for player in players:
+        if player["experience"] == "YES":
+            experienced_players.append(player)
+        else:
+            inexperienced_players.append(player)
+    
+    # returns a tuple with both lists
+    return (experienced_players, inexperienced_players)
+
+def sort_players(levels_tuple_of_lists):
+    pass
 # save teams to a text file
 
 
 
 
+def main():
+    PLAYER_DATA = "soccer_players.csv"
+    TEAMS_NAMES = ["SHARKS", "DRAGONS", "RAPTORS"]
+    TEAMS_DATA = "teams.txt"
 
+    # read and convert players data to pythonic format (list of dicts)
+    list_of_players = csv_to_list_of_dicts(PLAYER_DATA)
+    
+    # sort players to two list of ex and inex using tuple unpacking 
+    experienced_players, inexperienced_players = experiance_level_lists(list_of_players)
 
+    # shuffle each list and assign appropriate amount of players to each team
 
+    teams = {}
+    team_number = len(TEAMS_NAMES)
 
 
 
@@ -49,4 +78,5 @@ def csv_to_list_of_dicts(csv_file):
 
 
 if __name__ == "__main__":
-    print(csv_to_dictionary("soccer_players.csv"))
+    main()
+
