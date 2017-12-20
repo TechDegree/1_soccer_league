@@ -2,7 +2,6 @@ import csv
 import random
 
 # import CSV data and save to a dictionary
-
 def csv_to_list_of_dicts(csv_file):
 
     with open(csv_file, newline='') as players_csv:
@@ -44,10 +43,6 @@ def experiance_level_lists(players):
     # returns a tuple with both lists
     return (experienced_players, inexperienced_players)
 
-def sort_players(levels_tuple_of_lists):
-    pass
-# save teams to a text file
-
 
 def player_to_string(player_dic):
     # changes player into a string that can be saved to a text file
@@ -59,10 +54,22 @@ def player_to_string(player_dic):
     )
     return player_string
 
+# save teams to a text file
+def save_to_file(file_name, teams_dic):
+    # open file, with possible re-write, and creation if not there
+    with open(file_name, "w") as file:
+
+        for team_name, players in teams_dic.items():
+            file.write(team_name + '\n') # save team name first
+            # iterate over all players assigned to the team
+            for player in players: 
+                player_string = player_to_string(player)
+                file.write(player_string + "\n")            
+            file.write("\n") # add a new line after each team
+    
 
 def main():
     PLAYER_DATA = "soccer_players.csv"
-    TEAMS_NAMES = ["SHARKS", "DRAGONS", "RAPTORS"]
     TEAMS_NAMES = ["Sharks", "Dragons", "Raptors"]
     TEAMS_DATA = "teams.txt"
     TEAMS = {}
@@ -103,10 +110,8 @@ def main():
         
         TEAMS[team_name] = players
 
-    print(TEAMS)
-
-
-
+    # save teams to a file
+    save_to_file(TEAMS_DATA, TEAMS)
 
 
 if __name__ == "__main__":
