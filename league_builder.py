@@ -66,7 +66,41 @@ def save_to_file(file_name, teams_dic):
                 player_string = player_to_string(player)
                 file.write(player_string + "\n")            
             file.write("\n") # add a new line after each team
+
+def create_letter(player, team, start_hour="10:00 AM",
+                  start_date="Tuesday, March 7",
+                  location="Thorns Boys and Girls Club",
+                  season_year="2018", 
+                  head_coach="Michelle Gibregh"):
+    # create name for the letter text file
+    file_name = player["name"].lower().replace(" ", "_") + ".txt"
+    letter_string = """Dear {}, \n
+We would like to welcome {} to the {}. Our first practice will be at {} on {} at {}.
+We are looking forward to having {} with us, and hope to celebrate a successful {} season together.\n
+Best Regards,
+{}
+{}, Head Coach"""
+    player_full_name = player["name"]
+    player_first_name = player_full_name.split()[0] # split on space, take first name
     
+    letter_text = letter_string.format(
+        player["guardian_names"],
+        player_full_name,
+        team,
+        start_hour,
+        start_date,
+        location,
+        player_first_name,
+        season_year,
+        team,
+        head_coach)
+
+    # save data to file
+    with open(file_name, "w") as file:
+        file.write(letter_text)
+        
+
+
 
 def main():
     PLAYER_DATA = "soccer_players.csv"
@@ -98,7 +132,7 @@ def main():
     random.shuffle(inexperienced_players)
 
     # organize players into teams
-    for team_name in TEAMS_NAMES:
+    for team_name, letter_details in TEAMS_NAMES.items():
         players = []
 
         # number of players that must be taken from each experience level
@@ -106,9 +140,30 @@ def main():
 
         while players_from_each > 0:
             # remove player from both experience levels 
+            # send letters to the players' guardians
+            ex_player = experienced_players.pop()
+            create_letter(ex_player, team_name, 
+                  start_hour=letter_details[0],
+                  start_date=letter_details[1],
+                  location=letter_details[2],
+                  season_year=letter_details[3],
+                  head_coach=letter_details[4]
+            )
+
+            inex_player = inexperienced_players.pop()
+            create_letter(inex_player, team_name, 
+                  start_hour=letter_details[0],
+                  start_date=letter_details[1],
+                  location=letter_details[2],
+                  season_year=letter_details[3],
+                  head_coach=letter_details[4]
+            )
+
+
             # and add to players for current team
-            players.append(experienced_players.pop())    
-            players.append(inexperienced_players.pop())    
+            players.append(ex_player)
+            players.append(inex_player)
+
             players_from_each -= 1
         
         # add all players to a team in a key:value (team:players) dic
@@ -116,6 +171,12 @@ def main():
 
     # save teams to a file
     save_to_file(TEAMS_DATA, TEAMS)
+
+    # create letters to guardians of every player
+
+
+
+
 
 
 if __name__ == "__main__":
