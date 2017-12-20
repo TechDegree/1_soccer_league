@@ -16,7 +16,7 @@ def csv_to_list_of_dicts(csv_file):
         Experience = player[2]
         Guardian name(s) = player[3]'''
     
-    # create a list with each player as dicitionary
+    # create a list with each player as dictionary, making it order independent
     list_player_dic = []
     for player in players_list:
         name, height, experience, guardian_names = player
@@ -49,11 +49,21 @@ def sort_players(levels_tuple_of_lists):
 # save teams to a text file
 
 
+def player_to_string(player_dic):
+    # changes player into a string that can be saved to a text file
+    # uses only the data required in instructions
+    player_string = "{}, {}, {}". format(
+        player_dic["name"], 
+        player_dic["experience"], 
+        player_dic["guardian_names"]        
+    )
+    return player_string
 
 
 def main():
     PLAYER_DATA = "soccer_players.csv"
     TEAMS_NAMES = ["SHARKS", "DRAGONS", "RAPTORS"]
+    TEAMS_NAMES = ["Sharks", "Dragons", "Raptors"]
     TEAMS_DATA = "teams.txt"
     TEAMS = {}
     
