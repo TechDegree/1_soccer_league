@@ -9,11 +9,11 @@ def csv_to_list_of_dicts(csv_file):
         players_list = list(player_reader) # list of lists
         players_list.pop(0) # remove description line 
         
-        '''players_list conatins each player is a list with this information order:
-        Name = player[0]
-        Height (in inches) = player[1]
-        Experience = player[2]
-        Guardian name(s) = player[3]'''
+        # players_list conatins each player is a list with this information order:
+        # Name = player[0]
+        # Height (in inches) = player[1]
+        # Experience = player[2]
+        # Guardian name(s) = player[3]
     
     # create a list with each player as dictionary, making it order independent
     list_player_dic = []
@@ -81,33 +81,33 @@ def main():
     experience_tuple = experiance_level_lists(list_of_players)
     experienced_players, inexperienced_players = experience_tuple
 
-    # shuffle each list and assign appropriate amount of players to each team
+    # shuffle each list and assign appropriate amount of players to each team:
+    # the number of players has to be so to make equal number of players per team 
+    # the number can be changed to anything, as long as the above constraint stays    
     team_number = len(TEAMS_NAMES)
     players_num = len(list_of_players)
-
-    # the number of players has to be so to make equal number of players per team 
-    # the number can be changed to anything, as long as the above constraint stays
     players_per_team = players_num / team_number
 
-    # shuffle players in experience level lists
+    # shuffle players in (in)experience level lists
     # random.shuffle() shuffles in place, returns None
     random.shuffle(experienced_players)
     random.shuffle(inexperienced_players)
 
-    # organize playrs
+    # organize players into teams
     for team_name in TEAMS_NAMES:
-        # number of players that must be taken from each experience level
         players = []
-        
+
+        # number of players that must be taken from each experience level
         players_from_each = players_per_team / len(experience_tuple)
 
         while players_from_each > 0:
-            # remove player from both experience levels and add to players for 
-            # current team
+            # remove player from both experience levels 
+            # and add to players for current team
             players.append(experienced_players.pop())    
             players.append(inexperienced_players.pop())    
             players_from_each -= 1
         
+        # add all players to a team in a key:value (team:players) dic
         TEAMS[team_name] = players
 
     # save teams to a file
