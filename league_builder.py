@@ -20,9 +20,9 @@ def csv_to_list_of_dicts(csv_file):
     for player in players_list:
         name, height, experience, guardian_names = player
         one_player_dict = {"name" : name, 
-        "height" : height,
-        "experience" : experience,
-		"guardian_names" : guardian_names}
+                        "height" : height, 
+                        "experience" : experience,
+                        "guardian_names" : guardian_names}
         list_player_dic.append(one_player_dict)
 
     return list_player_dic
