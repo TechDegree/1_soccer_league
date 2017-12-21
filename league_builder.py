@@ -154,7 +154,7 @@ def main():
                   start_date=letter_details[1],
                   location=letter_details[2],
                   season_year=letter_details[3],
-                  head_coach=letter_details[4])            )
+                  head_coach=letter_details[4])
 
             # and add to players for current team
             players.append(ex_player)
