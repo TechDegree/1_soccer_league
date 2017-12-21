@@ -74,12 +74,12 @@ def create_letter(player, team, start_hour="10:00 AM",
                   head_coach="Michelle Gibregh"):
     # create name for the letter text file
     file_name = player["name"].lower().replace(" ", "_") + ".txt"
-    letter_string = """Dear {}, \n
-We would like to welcome {} to the {}. Our first practice will be at {} on {} at {}.
-We are looking forward to having {} with us, and hope to celebrate a successful {} season together.\n
-Best Regards,
-{}
-{}, Head Coach"""
+    letter_string = "Dear {}, \n\nWe would like to welcome {} to the {}. " \
+                    "Our first practice will be at {} on {} at {}. " \
+                    "We are looking forward to having {} with us, and hope to " \
+                    "celebrate a successful {} season together.\n\n" \
+                    "Best Regards,\n{} team\n{}, Head Coach"
+
     player_full_name = player["name"]
     player_first_name = player_full_name.split()[0] # split on space, take first name
     
@@ -106,8 +106,7 @@ def main():
     PLAYER_DATA = "soccer_players.csv"
     TEAMS_NAMES = {"Sharks": ["10:00 AM", "Monday, March 6", "Green Dragon Venue", "2018", "Juliana Yandar"],
                    "Dragons": ["11:20 AM", "Thursday, March 9", "Yellow Boats United", "2018", "Alina Marakash"],
-                   "Raptors": ["09:15 AM", "Wednesday, March 2", "Orange Monsters University", "2018", "Dima Kailar"]
-    }
+                   "Raptors": ["09:15 AM", "Wednesday, March 2", "Orange Monsters University", "2018", "Dima Kailar"]}
 
     TEAMS_DATA = "teams.txt"
     TEAMS = {}
@@ -147,8 +146,7 @@ def main():
                   start_date=letter_details[1],
                   location=letter_details[2],
                   season_year=letter_details[3],
-                  head_coach=letter_details[4]
-            )
+                  head_coach=letter_details[4])
 
             inex_player = inexperienced_players.pop()
             create_letter(inex_player, team_name, 
@@ -156,9 +154,7 @@ def main():
                   start_date=letter_details[1],
                   location=letter_details[2],
                   season_year=letter_details[3],
-                  head_coach=letter_details[4]
-            )
-
+                  head_coach=letter_details[4])            )
 
             # and add to players for current team
             players.append(ex_player)
@@ -171,13 +167,6 @@ def main():
 
     # save teams to a file
     save_to_file(TEAMS_DATA, TEAMS)
-
-    # create letters to guardians of every player
-
-
-
-
-
 
 if __name__ == "__main__":
     main()
